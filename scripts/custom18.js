@@ -11,19 +11,19 @@ drawSquareGrid(document.getElementById('board18'), 10);
  * @param {number} nbCellPerRow The number of cells in a row (same for column, as the grid is a square)
  */
 function drawSquareGrid(containerElem, nbCellPerRow) {
-  let cellElemTemplate = document.createElement('div');
+  const cellElemTemplate = document.createElement('div');
   cellElemTemplate.classList.add('cell');
 
   for(let i = 1; i <= nbCellPerRow; i++) {
-    let rowElem = document.createElement('div');
+    const rowElem = document.createElement('div');
     rowElem.classList.add('row');
     containerElem.append(rowElem);
 
-    let rowCellElems = [];
+    const rowCellElems = [];
     for (let j = 1; j <= nbCellPerRow; j++) {
       /** @type {HTMLDivElement} */
       // @ts-ignore
-      let cellElem = cellElemTemplate.cloneNode(true);
+      const cellElem = cellElemTemplate.cloneNode(true);
       cellElem.classList.add('cell');
       // workaround for designating cells that shall have a left and a top border,
       // with css classes on the most left cell and most top of the grid
@@ -40,4 +40,3 @@ function drawSquareGrid(containerElem, nbCellPerRow) {
     rowElem.append(...rowCellElems);
   }
 }
-
