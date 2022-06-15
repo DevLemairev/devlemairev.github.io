@@ -1,10 +1,114 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr-FR">
     <head>
-        <link rel="stylesheet" href="index.css" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lemaire Vincent</title>
+
+        <meta name="author" content="Lemaire Vincent">
+        <meta name="description" content="Portfolio de Lemaire Vincent, d&eacute;veloppeur web.">
+
+        <link href="styles/main.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <header>
-            <h1>DevLemairev</h1>
+            <h1>Vincent Lemaire in a glance</h1>
+            <p>
+                Cette page se veut être un aperçu au jour le jour de mes connaissances, mon parcours, mes orientations...<br/>
+                dont le contenu évoluera dans le temps suivant... mes connaissances, mon parcours, mes orientations !
+            </p>
         </header>
+        <main>
+            <section>
+                <h2>Exercices</h2>
+                <section>
+                    <h3>Exercices perso</h3>
+                    <article class="topic-main-css topic-aside-js">
+                        <h4>Grille stylée sans grid, éléments générés par js</h4>
+                        <p>
+                            Mon objectif est de rendre une grille en utilisant des directives css standards (pas de grid),
+                            et d'utiliser Javascript pour la génération des cases.
+                        </p>
+                        <div id="board18"></div>
+                        <link href="styles/custom18.css" rel="stylesheet" type="text/css">
+                        <script src="scripts/custom18.js"></script>
+                        <p>
+                            Je voulais avoir une maîtrise exacte de la taille du plateau, et que le calcul de la taille des cases ne soit pas affecté par les marges et les bordures.
+                        </p>
+                        <p>
+                            Pour ce dernier point, les éléments déterminants ont étés l'utilisation de la directive css <code>box-sizing: border-box</code>,
+                            ainsi que l'encapsulation de chaque ligne de la grille dans un <code>div</code> dédié.
+                            En effet sans cette encapsulation, les cases, chacune rendue par un <code>div</code> et par une directive css <code>display: inline-block</code>,
+                            s'alignaient correctement par lignes, mais il restait des marges verticales entre celles-ci. Je pense que ces marges étaient induites par le <em>inline</em> du <code>inline-block</code>.
+                            En encapsulant les cases d'une ligne dans un <code>div</code>, élément nativement <em>block</em>, je me suis affranchi de cet effet <em>inline</em>.
+                        </p>
+                        <p>
+                            Le résultat est correct, et je peux jouer <em>presque</em> facilement sur le nombre de cases du plateau. Presque, car si côté Javascript ce nombre est simplement un argument de la fonction <code>drawSquareGrid</code> (il pourrait être paramétrable via une propriété <code>data-nb-case-per-row</code> de l'élément plateau, par exemple),
+                            il faut encore modifier les directives css <code>height: 10%;</code> et <code>width: 10%;</code> &ndash; 10% car 10 cases par côté codé en dur.
+                            Je soupçonne que l'utilisation de l'unité relative <code>fr</code> devrait m'aider. To be continued... 
+                        </p>
+                        <div class="resource">
+                            Les ressources mises en &oelig;uvre
+                            <ul>
+                                <li><a href="styles/custom18.css" target="_blank">Feuille de style</a></li>
+                                <li><a href="scripts/custom18.js" target="_blank">Script Javascript</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="topic-main-css topic-aside-js">
+                        <h4>Grille <strong>paramétrable</strong>, stylée sans grid, éléments générés par js</h4>
+                        <p>
+                            C'est mon prochain challenge ;)
+                        </p>
+                    </article>
+                </section>
+                <section>
+                    <h3>Exercises d&apos;évaluation</h3>
+                    <p>
+                        Challenge also &#x1f972;
+                    </p>
+                    <div class="resource">
+                        Les exercices d&apos;évaluation
+                        <ul>
+                            <li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Fundamental_CSS_comprehension" class="external">Fundamental CSS comprehension</a></li>
+                            <li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Creating_fancy_letterheaded_paper" class="external">Creating fancy letterheaded paper</a></li>
+                            <li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/A_cool_looking_box" class="external">A cool-looking box</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <h2>&Agrave; propos de cette page : partis pris</h2>
+                <p>
+                    Cette page est une mise en pratique de mes connaissances. Elles peuvent être remises en cause !
+                    <br/>Certains choix méritent des détails &downarrow;
+                </p>
+                <article class="topic-main-html topic-aside-charset">
+                    <h3>&Eacute;chapper les caractères HTML : oui mes lesquels ?</h3>
+                    <p>
+                        Très peu de caractères sont échappés dans le code html de cette page (par exemple é pourrait être échappé <code>&amp;eacute;</code>), parce qu'elle déclare utiliser le jeu de caractères <code>UTF-8</code> grâce à la balise <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> dans le <code>header</code>.
+                        <br/>Ainsi, pour peu que le code html soit encodé en utf-8 (mon IDE est configuré pour cela), et que le navigateur qui lit cette page connaît utf-8 (ce que l'on peut considérer comme étant le cas pour tous les navigateurs), les caractères seront rendus tels que je les ai écrits.
+                    </p>
+                    <p>
+                        Pour être exhaustif, il faut s'assurer aussi que le serveur http ne surcharge pas la déclaration de la balise meta. Il peut le faire, en précisant le jeu de caractères dans une en-tête de réponse <code>Content-Type: text/html; charset=XXX</code> (<code>XXX</code> étant un code de jeu de caractères autre que utf-8, par ex. iso-8859-1)
+                        Ce serait fâcheux et... surprenant !
+                    </p>
+                    <div class="info">
+                        Liens utiles
+                        <ul>
+                            <li><a href="https://www.w3.org/International/questions/qa-escapes#use" class="external">W3C - When escapes can be useful</a></li>
+                            <li><a href="https://www.toptal.com/designers/htmlarrows/" class="external">A delightful reference for HTML Symbols, Entities and ASCII Character Codes</a></li>
+                            <li><a href="https://www.unicode.org/emoji/charts/full-emoji-list.html" class="external">Full Emoji List</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+            <section>
+                <h2>Mes outils, mon environnement</h2>
+                <p>
+                    TODO : VSCode, Live Server, Github pages
+                </p>
+            </section>
+        </main>
     </body>
 </html>
