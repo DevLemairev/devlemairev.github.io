@@ -6,7 +6,7 @@
         <title>Lemaire Vincent</title>
 
         <meta name="author" content="Lemaire Vincent">
-        <meta name="description" content="Portfolio de Lemaire Vincent, d&eacute;veloppeur web.">
+        <meta name="description" content="Portfolio de Lemaire Vincent, développeur web.">
 
         <link href="styles/main.css" rel="stylesheet" type="text/css">
     </head>
@@ -23,7 +23,7 @@
                 <h2>Exercices</h2>
                 <section>
                     <h3>Exercices perso</h3>
-                    <article data-id="art-0" class="topic-main-css topic-aside-js">
+                    <article id="art-0" class="topic-main-css topic-aside-js">
                         <h4>Grille stylée sans grid, éléments générés par js</h4>
                         <p>
                             Mon objectif est de rendre une grille en utilisant des directives css standards (pas de grid),
@@ -48,18 +48,40 @@
                             Je soupçonne que l'utilisation de l'unité relative <code>fr</code> devrait m'aider. To be continued... 
                         </p>
                         <div class="resource">
-                            Les ressources mises en &oelig;uvre
+                            Les ressources
                             <ul>
                                 <li><a href="styles/custom18.css" target="_blank">Feuille de style</a></li>
                                 <li><a href="scripts/custom18.js" target="_blank">Script Javascript</a></li>
                             </ul>
                         </div>
                     </article>
-                    <article data-id="art-1" class="topic-main-css topic-aside-js">
-                        <h4>Grille <strong>paramétrable</strong>, stylée sans grid, éléments générés par js</h4>
+                    <article id="art-1" class="topic-main-css topic-aside-js">
+                        <h4>Grille <strong>paramétrable</strong>, sans grid, éléments générés par js</h4>
                         <p>
-                            C'est mon prochain challenge ;)
+                            L&apos;idée est de reprendre <a href="#art-0">l&apos;implémentation précédente</a>, pour que le nombre de cases soit facilement paramétrable, avec uniquement l&apos;argument <code>nbCellPerRow</code> de la fonction <code>drawSquareGrid</code>
+                            <br/>&rightarrow; pas de style <code>height</code> et <code>width</code> en dur dans le css (ou alors valeur calculée en fonction du nombre de cases par côté)
+                            <br/>&rightarrow; découpler au maximum le modèle (js) de la vue (html et css)
                         </p>
+                        <div id="board63"></div>
+                        <link href="styles/custom63.css" rel="stylesheet" type="text/css">
+                        <script src="scripts/custom63.js"></script>
+                        <script>
+                            drawSquareGrid2(document.getElementById('board63'), 5);
+                        </script>
+                        <p>
+                            J&apos;ai amélioré le découplage modèle - vue notamment pour l&apos;application des bordures haute et gauche des cases les plus en haut, et les plus à gauche. Voir les ressources utilisées (lien ci-dessous)
+                            Mais je n&apos;ai pu m&apos;affranchir de positionner dans le code js les <code>width</code> et <code>height</code> des cellules.
+                            Impossible de le faire dans la css, car ce sont des valeurs calculées suivant le nombre de cellule par côté.
+                            L&apos;utilisation de la fonction css <code>counter</code> permet de calculer ce nombre; j&apos;espérais ensuite pouvoir l&apos;utiliser avec la fonction <code>calc</code> pour déterminer la valeur... mais sans succés.
+                            On va considérer que le résultat est acceptable, cela reste un exercice, qui m&apos;a permis de m&apos;exercer encore un peu plus aux css !
+                        </p>
+                        <div class="resource">
+                            Les ressources
+                            <ul>
+                                <li><a href="styles/custom63.css" target="_blank">Feuille de style</a></li>
+                                <li><a href="scripts/custom63.js" target="_blank">Script Javascript</a></li>
+                            </ul>
+                        </div>
                     </article>
                 </section>
                 <section>
@@ -83,7 +105,7 @@
                     Cette page est une mise en pratique de mes connaissances. Elles peuvent être remises en cause !
                     <br/>Certains choix méritent des détails &downarrow;
                 </p>
-                <article data-id="art-2" class="topic-main-html topic-aside-charset">
+                <article id="art-2" class="topic-main-html topic-aside-charset">
                     <h3>&Eacute;chapper les caractères HTML : oui mes lesquels ?</h3>
                     <p>
                         Très peu de caractères sont échappés dans le code html de cette page (par exemple é pourrait être échappé <code>&amp;eacute;</code>), parce qu'elle déclare utiliser le jeu de caractères <code>UTF-8</code> grâce à la balise <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> dans le <code>header</code>.
