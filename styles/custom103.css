@@ -1,0 +1,22 @@
+/*
+Tips : 
+  box-sizing: border-box => ensure the width and height properties do include the border width (that simplifies the calculation of them, and avoids the margins taking place over the borders)
+*/
+
+div#board103 {
+  box-sizing: border-box;
+  margin: auto;
+  width: 25em;
+  height: 25em;
+  display: grid;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  /* grid-template-rows and -columns must be set dynamically to repeat(nb cells per row, a 1/nb th of 1fr unit) */
+  /* e.g. grid-template-rows: repeat(5, 0.2fr); for 5 cells per row */
+}
+
+div#board103 .cell {
+  box-sizing: border-box;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}

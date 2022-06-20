@@ -32,7 +32,7 @@
             <section>
                 <h2>Exercices</h2>
                 <section>
-                    <h3>Exercices perso</h3>
+                    <h3>Dessine moi une grille</h3>
                     <article id="art-0" class="topic-main-css topic-aside-js">
                         <h4>Grille stylée sans grid, éléments générés par js</h4>
                         <p>
@@ -82,7 +82,7 @@
                             J&apos;ai amélioré le découplage modèle - vue notamment pour l&apos;application des bordures haute et gauche des cases les plus en haut, et les plus à gauche. Voir les ressources utilisées (lien ci-dessous)
                             Mais je n&apos;ai pu m&apos;affranchir de positionner dans le code js les <code>width</code> et <code>height</code> des cellules.
                             Impossible de le faire dans la css, car ce sont des valeurs calculées suivant le nombre de cellule par côté.
-                            L&apos;utilisation de la fonction css <code>counter</code> permet de calculer ce nombre; j&apos;espérais ensuite pouvoir l&apos;utiliser avec la fonction <code>calc</code> pour déterminer la valeur... mais sans succés.
+                            L&apos;utilisation de la fonction css <code>counter</code> permet de calculer ce nombre; j&apos;espérais ensuite pouvoir l&apos;utiliser avec la fonction <code>calc</code> pour déterminer la valeur... mais sans succés (je pense que cette fonction est avant tout destinée à faciliter les opérations avec des unités de longueur différentes)
                             On va considérer que le résultat est acceptable, cela reste un exercice, qui m&apos;a permis de m&apos;exercer encore un peu plus aux css !
                         </p>
                         <div class="resource">
@@ -90,6 +90,29 @@
                             <ul>
                                 <li><a href="styles/custom63.css" target="_blank">Feuille de style</a></li>
                                 <li><a href="scripts/custom63.js" target="_blank">Script Javascript</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article id="art-3" class="topic-main-css topic-aside-js">
+                        <h4>Grille paramétrable, <strong>avec grid</strong>, éléments générés par js</h4>
+                        <p>
+                            J&apos;en termine avec les grilles après avoir lu <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids#what_is_grid_layout" class="external">What is grid layout?</a>
+                            et m&apos;être exercé avec <a href="https://cssgridgarden.com/#fr" class=""external">Grid Garden</a>
+                        </p>
+                        <div id="board103"></div>
+                        <link href="styles/custom103.css" rel="stylesheet" type="text/css">
+                        <script src="scripts/custom103.js"></script>
+                        <script>
+                            drawSquareGrid3(document.getElementById('board103'), 15);
+                        </script>
+                        <p>
+                            Le layout <code>grid</code> est très puissant; mon exercice de dessin d'une grille est inadapté pour révéler tout le potentiel de ce layout. Je n&apos;en maîtrise pas l&apos;once d&apos;un pouillème, donc pour le moment je m&apos;arrête là.
+                        </p>
+                        <div class="resource">
+                            Les ressources
+                            <ul>
+                                <li><a href="styles/custom103.css" target="_blank">Feuille de style</a></li>
+                                <li><a href="scripts/custom103.js" target="_blank">Script Javascript</a></li>
                             </ul>
                         </div>
                     </article>
