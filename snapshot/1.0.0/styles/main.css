@@ -1,0 +1,14 @@
+/*
+ Display an arrow U+0279A after anchor's link to be opened in a new tab
+*/
+a.external::after {
+  display: inline-block;
+  margin-left: 0.1em;
+  content: "\0279A";
+  font-size: small;
+}
+
+div.info ul,
+div.resource ul {
+  list-style-type: none;
+}
