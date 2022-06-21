@@ -1,6 +1,7 @@
 /*
 Tips : 
   box-sizing: border-box => ensure the width and height properties do include the border width (that simplifies the calculation of them, and avoids the margins taking place over the borders)
+  display: grid => declares the container on which the grid layout must be applied (instead of the normal flow layout)
 */
 
 div#board103 {
