@@ -1,0 +1,36 @@
+/*
+Tips : 
+  box-sizing: border-box => ensure the width and height properties do include the border width (that simplifies the calculation of them, and avoids the margins taking place over the borders)
+  display: inline-block => the element, when a block element, won't generate line breaks from either side
+  div#board63 div:first-child .cell => selector to add a border top on the cells of the 1st row of the board
+  div#board63 .row .cell:first-child => selector to add a border left on the 1st cell of all of the rows of the board
+*/
+
+div#board63 {
+  box-sizing: border-box;
+  margin: auto;
+  width: 25em;
+  height: 25em;
+}
+
+div#board63 .row:first-child .cell {
+  border-top: 1px solid black;
+}
+
+div#board63 .row .cell:first-child {
+  border-left: 1px solid black;
+}
+
+div#board63 .row {
+  /* height must be set dynamically to 100% / nb cells per row */
+  box-sizing: border-box;
+}
+
+div#board63 .cell {
+  /* width must be set dynamically to 100% / nb cells per row */
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
