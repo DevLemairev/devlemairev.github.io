@@ -33,11 +33,33 @@
             <section>
                 <h2>&Agrave; propos de cette page</h2>
                 <p>
-                    Après quelques lectures académiques, je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette présente page est hébergée, pour un double objectif : mettre en pratique mon apprentissage du front, et me constituer une vitrine de présentation.
+                    Après quelques lectures académiques je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette présente page est hébergée, pour un double objectif : mettre en pratique mon apprentissage du front, et me constituer une vitrine de présentation.
                     Tout ceci en constante évolution : la page évoluera au gré de mon cheminement.
                 </p>
                 <article id="art-5">
-                    TODO timelapse de la page
+                    <h4>Historique</h4>
+                    <p>
+                        Les différents versions de cette page sont consultables ici, depuis la version <code>1.0.2</code> (car c&apos;est celle-ci qui introduit cette fonctionnalité de navigation dans l&apos;historique)
+                    </p>
+                    <nav id="archive-nav" aria-labelledby="archive-navigation">
+                        <div class="slider">
+                            <button type="button" class="slider-button-left">&lt;</button>
+                            <div class="slides-parent-div"><div id="archive-slides" class="slides-div"></div></div>
+                            <button type="button" class="slider-button-right">&gt;</button>
+                        </div>
+                    </nav>
+                    <link href="styles/arhiveNav.css" rel="stylesheet" type="text/css">
+                    <script src="scripts/archiveNav.js"></script>
+                    <script>
+                        renderArchiveNavigationTags(document.getElementById('archive-slides'), ["1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4", "1.0.5", "1.0.6", "1.0.7", "1.0.8", "1.0.9", "1.0.10", "1.0.11", "1.0.12", "1.0.13", "1.0.14" ]);
+                    </script>
+                    <div class="info">
+                        Les versions antérieures à la fonctionnalité d&apos;historique sont ici
+                        <ul>
+                            <li><a href="snapshot/1.0.0" rel="nofollow">1.0.0</a></li>
+                            <li><a href="snapshot/1.0.1" rel="nofollow">1.0.1</a></li>
+                        </ul>
+                    </div>
                 </article>
             </section>
             <section>
@@ -53,7 +75,7 @@
                     <article id="art-0" class="topic-main-css">
                         <h4>Grille stylée sans grid, éléments générés par js</h4>
                         <p>
-                            Mon objectif est de rendre une grille en utilisant des directives css standards (pas de grid),
+                            Mon objectif est de rendre une grille en utilisant des directives css de base (pas de grid),
                             et d'utiliser Javascript pour la génération des cases.
                         </p>
                         <div id="board18"></div>
@@ -124,7 +146,7 @@
                             drawSquareGrid3(document.getElementById('board103'), 15);
                         </script>
                         <p>
-                            Le layout grid va bien au-delà de ce que j&apos;en ai utilisé ici. Il a été imaginé pour pouvoir organiser du contenu sur une page selon une structure tabulaire (agencement en colonnes et lignes, beaucoup plus générique et souple que le traditionnel élément <code>table</code> qui de srucroît n&apos;a pas le rôle de structuration de page)
+                            Le layout grid va bien au-delà de ce que j&apos;en ai utilisé ici. Il a été imaginé pour pouvoir organiser du contenu sur une page selon une structure tabulaire (agencement en colonnes et lignes, beaucoup plus générique et souple que le traditionnel élément <code>table</code> qui de surcroît n&apos;a pas le rôle de structuration de page)
                         </p>
                         <div class="resource">
                             Les ressources
