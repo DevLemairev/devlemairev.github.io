@@ -28,7 +28,7 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
 
   slidesContainer.append(...slides.map(
       (slide: HTMLElement, order: Number) => {
-        slide.classList.add('slide', 'slide-visible');
+        slide.classList.add('slide');
         slide.setAttribute("data-slide-order", order.toString());
         return slide;
       }

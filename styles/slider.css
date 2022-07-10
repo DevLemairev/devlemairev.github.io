@@ -30,15 +30,11 @@ nav#archive-nav {
   Workaround as suggested here : https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class?answertab=trending#tab-top
   => set all visible slides margin left 0, but 1em for those which follow a visible slide...  
 */
-.slide-visible {
+.slide {
   display: inline-block;
   margin-left: 0;
 }
 
-.slide-visible ~ .slide-visible {
+.slide ~ .slide {
   margin-left: 1em;
-}
-
-.slide-invisible {
-  display: none;
 }

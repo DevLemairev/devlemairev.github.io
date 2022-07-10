@@ -24,7 +24,7 @@ function declareSlider(slider, slides) {
     slider.classList.add('slider');
     slider.append(previousButton, slidesParentContainer, nextButton);
     slidesContainer.append(...slides.map((slide, order) => {
-        slide.classList.add('slide', 'slide-visible');
+        slide.classList.add('slide');
         slide.setAttribute("data-slide-order", order.toString());
         return slide;
     }));
