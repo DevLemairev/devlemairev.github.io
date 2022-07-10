@@ -1,31 +1,24 @@
 "use strict";
 
 /**
- * Generates a list of anchors, one for each item of the version parameter, each one containing an anchor referencing the archived page designated by this version item. 
+ * Delcare an element as a slider : add the slides elements as children, plug the inherent behaviours.
  * 
- * Each item of versions must be a string named as a subfolder of 'snapshot' source folder.
- * Each anchor has a 'data-order' attribute which value is the position of the anchor in the list (starting at 0)
+ * Each slide will be provided with a new 'data-slide-order' attribute which value is the position of the slide in the list (starting at 0)
  * 
- * @see {@link styles/archiveNav.css}
+ * @see {@link styles/slider.css}
  * 
  * @param {HTMLElement} slider The slider element.
- * @param {Array<string>} versions The versions of the archived pages that must be present in the list.
+ * @param {Array<HTMLElement>} slides The slides to add to the slider.
  */
-function declareSlider(slider: HTMLElement, versions: Array<string>) {
+function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
   const slidesContainer = <HTMLElement> slider.getElementsByClassName('slides-container')[0];
   if (slidesContainer == null) throw "Missing slides-container element in slider";
-  
-  const anchorTemplate = document.createElement('a');
-  anchorTemplate.rel = "nofollow";
 
-  slidesContainer.append(...versions.map(
-      (item: string, index: Number) => {
-        const anchor = <HTMLAnchorElement> anchorTemplate.cloneNode(true);
-        anchor.href = `snapshot/${item}`;
-        anchor.text = item;
-        anchor.className = 'slide slide-visible';
-        anchor.setAttribute("data-order", index.toString());
-        return anchor;
+  slidesContainer.append(...slides.map(
+      (slide: HTMLElement, order: Number) => {
+        slide.classList.add('slide', 'slide-visible');
+        slide.setAttribute("data-slide-order", order.toString());
+        return slide;
       }
     )
   );
@@ -52,9 +45,9 @@ function setSliderButtonsState(slider: HTMLElement) {
   for (let i = 0; i < slides.length; i++) {
     const slide = slides[i];
     if (slide.offsetTop == slidesContainer.offsetTop) {
-      if (slide.getAttribute("data-order") == null) throw "Missing attribute 'data-order' on slide element";
-      const slideOrder = Number.parseInt(slide.getAttribute("data-order") ?? "NaN", 10);
-      if (isNaN(slideOrder)) throw "Not authorized value [" + slide.getAttribute("data-order") + "] for 'data-order' attribute on slide element - must be an integer >= 0";
+      if (slide.getAttribute("data-slide-order") == null) throw "Missing attribute 'data-slide-order' on slide element";
+      const slideOrder = Number.parseInt(slide.getAttribute("data-slide-order") ?? "NaN", 10);
+      if (isNaN(slideOrder)) throw "Not authorized value [" + slide.getAttribute("data-slide-order") + "] for 'data-slide-order' attribute on slide element - must be an integer >= 0";
       if (firstVisibleSlideOrder == -1) {
         firstVisibleSlideOrder = slideOrder;
       } else {
