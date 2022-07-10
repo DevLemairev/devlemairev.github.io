@@ -7,11 +7,11 @@ nav#archive-nav {
   height: 1em;
 }
 
-.slider-button-left {
+.slider-button-previous {
   margin-right: 1em;
 }
 
-.slider-button-right {
+.slider-button-next {
   margin-left: 1em;
 }
 

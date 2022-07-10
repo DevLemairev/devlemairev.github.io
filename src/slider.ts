@@ -34,17 +34,17 @@ function declareSlider(slider: HTMLElement, versions: Array<string>) {
 }
 
 /**
- * Enable or disable the left and right buttons from either side of a slider, according to slides that are outside the visible content of the slider.
+ * Enable or disable the previous and next buttons from either side of a slider, according to slides that are outside the visible content of the slider.
  * 
  * @param {HTMLElement} slider The slider element.
  */
 function setSliderButtonsState(slider: HTMLElement) {
   const slidesContainer = <HTMLElement> slider.getElementsByClassName('slides-container')[0];
   if (slidesContainer == null) throw "Missing slides-container element in slider";
-  const leftButton = <HTMLSelectElement> slider.getElementsByClassName('slider-button-left')[0];
-  if (leftButton == null) throw "Missing slider-button-left element in slider";
-  const rightButton = <HTMLSelectElement> slider.getElementsByClassName('slider-button-right')[0];
-  if (rightButton == null) throw "Missing slider-button-right element in slider";
+  const previousButton = <HTMLSelectElement> slider.getElementsByClassName('slider-button-previous')[0];
+  if (previousButton == null) throw "Missing slider-button-previous element in slider";
+  const nextButton = <HTMLSelectElement> slider.getElementsByClassName('slider-button-next')[0];
+  if (nextButton == null) throw "Missing slider-button-next element in slider";
 
   // We check if there are slides remaining before and after the currently visible slides
   let firstVisibleSlideOrder = -1, lastVisibleSlideOrder = -1;
@@ -63,8 +63,8 @@ function setSliderButtonsState(slider: HTMLElement) {
     }
   }
   
-  leftButton.disabled = firstVisibleSlideOrder <= 0;
-  rightButton.disabled = lastVisibleSlideOrder == slides.length - 1;
+  previousButton.disabled = firstVisibleSlideOrder <= 0;
+  nextButton.disabled = lastVisibleSlideOrder == slides.length - 1;
 }
 
 const sliderResizeObserver = new ResizeObserver(elements => {
