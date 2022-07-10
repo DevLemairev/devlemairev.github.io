@@ -11,7 +11,7 @@ nav#archive-nav {
   margin-right: 1em;
 }
 
-.slider-button-previous:before {
+.slider-button-previous::before {
   content: "<";
 }
 
@@ -19,7 +19,7 @@ nav#archive-nav {
   margin-left: 1em;
 }
 
-.slider-button-next:before {
+.slider-button-next::before {
   content: ">";
 }
 
