@@ -11,8 +11,16 @@ nav#archive-nav {
   margin-right: 1em;
 }
 
+.slider-button-previous:before {
+  content: "<";
+}
+
 .slider-button-next {
   margin-left: 1em;
+}
+
+.slider-button-next:before {
+  content: ">";
 }
 
 .slides-parent-container {

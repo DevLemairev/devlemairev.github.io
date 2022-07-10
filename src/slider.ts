@@ -12,7 +12,6 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
   const previousButton = document.createElement('button');
   previousButton.type = 'button';
   previousButton.className = 'slider-button-previous';
-  previousButton.innerText = '<';
   const slidesParentContainer = document.createElement('div');
   slidesParentContainer.className = 'slides-parent-container';
   const slidesContainer = document.createElement('div');
@@ -21,7 +20,6 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
   const nextButton = document.createElement('button');
   nextButton.type = 'button';
   nextButton.className = 'slider-button-next';
-  nextButton.innerText = '>';
 
   slider.classList.add('slider');
   slider.append(previousButton, slidesParentContainer, nextButton);
