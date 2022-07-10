@@ -29,59 +29,98 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
   slidesContainer.append(...slides.map(
       (slide: HTMLElement, order: Number) => {
         slide.classList.add('slide');
-        slide.setAttribute("data-slide-order", order.toString());
         return slide;
       }
     )
   );
 
+  computeFirstAndLastVisibleSlides(slider);
+  setSliderButtonsAvailability(slider);
   sliderResizeObserver.observe(slider);
 }
 
 /**
- * Enable or disable the previous and next buttons of a slider, according to slides that are outside the visible content of the slider.
+ * Claculate the order of the 1st and last visible slides.
  * 
  * @param {HTMLElement} slider The slider element.
  */
-function setSliderButtonsState(slider: HTMLElement) {
-  const slidesContainer = <HTMLElement> slider.getElementsByClassName('slides-container')[0];
-  if (slidesContainer == null) throw "Missing slides-container element in slider";
+function computeFirstAndLastVisibleSlides(slider: HTMLElement) {
+  // We check if there are slides remaining before and after the currently visible slides
+  let firstVisibleSlideOrder = -1, lastVisibleSlideOrder = -1;
+  const slides = <HTMLCollectionOf<HTMLElement>> slider.getElementsByClassName('slide');
+  for (let i = 0; i < slides.length; i++) {
+    const slide = slides[i];
+    if (slide.offsetTop == slider.offsetTop) {
+      if (firstVisibleSlideOrder == -1) {
+        firstVisibleSlideOrder = i;
+        // Case there is only one slide visible
+        if (i == slides.length - 1) {
+          lastVisibleSlideOrder = i;
+        }
+      } else {
+        lastVisibleSlideOrder = i;
+      }
+    } else if (lastVisibleSlideOrder > -1) {
+      // If we've reached a none visible slide, and the last visible slide is known, we have all necessary information : don't loop further
+      break;
+    }
+  }
+
+  slider[Symbol.for('FirstVisibleSlideOrder')] = firstVisibleSlideOrder;
+  slider[Symbol.for('LastVisibleSlideOrder')] = lastVisibleSlideOrder;
+}
+
+/**
+ * 
+ * @param {HTMLElement} slider The slider element.
+ */
+function setSliderButtonsAvailability(slider: HTMLElement) {
   const previousButton = <HTMLSelectElement> slider.getElementsByClassName('slider-button-previous')[0];
   if (previousButton == null) throw "Missing slider-button-previous element in slider";
   const nextButton = <HTMLSelectElement> slider.getElementsByClassName('slider-button-next')[0];
   if (nextButton == null) throw "Missing slider-button-next element in slider";
 
-  // We check if there are slides remaining before and after the currently visible slides
-  let firstVisibleSlideOrder = -1, lastVisibleSlideOrder = -1;
-  const slides = <HTMLCollectionOf<HTMLElement>> slidesContainer.getElementsByClassName('slide');
-  for (let i = 0; i < slides.length; i++) {
-    const slide = slides[i];
-    if (slide.offsetTop == slidesContainer.offsetTop) {
-      if (slide.getAttribute("data-slide-order") == null) throw "Missing attribute 'data-slide-order' on slide element";
-      const slideOrder = Number.parseInt(slide.getAttribute("data-slide-order") ?? "NaN", 10);
-      if (isNaN(slideOrder)) throw "Not authorized value [" + slide.getAttribute("data-slide-order") + "] for 'data-slide-order' attribute on slide element - must be an integer >= 0";
-      if (firstVisibleSlideOrder == -1) {
-        firstVisibleSlideOrder = slideOrder;
-      } else {
-        lastVisibleSlideOrder = slideOrder;
-      }
-    } else if (lastVisibleSlideOrder > -1) {
-      // If we've reach a none visible slide, and the last visible slide is known, we have all necessary information : don't loop further
-      break;
-    }
-  }
-  
-  previousButton.disabled = firstVisibleSlideOrder <= 0;
-  nextButton.disabled = lastVisibleSlideOrder == slides.length - 1;
+  previousButton.disabled = slider[Symbol.for('FirstVisibleSlideOrder')] <= 0;
+  nextButton.disabled = slider[Symbol.for('LastVisibleSlideOrder')] == slider.getElementsByClassName('slide').length - 1;
 }
 
 /**
  * Resize observer to plug with a slider.
  * 
- * Will recompute the previous and next buttons states, as when the slider is resized, the list of visible and invisible slides may be affected.
+ * Will recompute the previous and next buttons states, because when the slider is resized the list of visible and invisible slides may be affected.
+ * Thus depending of the visible slides includes the 1st and / or last one, we have to enable or not the next and previous buttons.
  */
 const sliderResizeObserver = new ResizeObserver(elements => {
   elements.forEach(element => {
-    setSliderButtonsState(element.target as HTMLElement);
+    const slider = <HTMLElement> element.target;
+    computeFirstAndLastVisibleSlides(slider);
+    setSliderButtonsAvailability(slider);
   });
 });
+
+/**
+ * Make the nth slide the first visible slide.
+ * 
+ * @param {HTMLElement} slider The slider element.
+ * @param {number} slideOrder The order of the slide to shift to next.
+ */
+function shiftToNthSlide(slider: HTMLElement, slideOrder: number) {
+  const slides = <HTMLCollectionOf<HTMLElement>> slider.getElementsByClassName('slide');
+  if (slideOrder < 0 || slideOrder > slides.length -1) throw 'slideOrder out of range';
+  for(let i = 0; i < slides.length; i++) {
+    // If both the target slide and the lastest of the collection are already visible, we don't loop further
+    if (slider[Symbol.for('LastVisibleSlideOrder')] == slides.length - 1 && slideOrder > slider[Symbol.for('FirstVisibleSlideOrder')]) {
+      break;
+    }
+    const slide = slides[i];
+    if (i < slideOrder) {
+      slide.style.display = 'none';
+      slide.setAttribute('data-slide-retired', "true");
+    } else {
+      slide.style.display = 'inline-block';
+      slide.removeAttribute('data-slide-retired');
+    }
+    computeFirstAndLastVisibleSlides(slider);
+  }
+  setSliderButtonsAvailability(slider);
+}

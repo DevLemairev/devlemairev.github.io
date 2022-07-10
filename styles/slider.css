@@ -3,8 +3,7 @@ nav#archive-nav {
 }
 
 .slider {
-  display: inline-flex;
-  height: 1em;
+  display: flex;
 }
 
 .slider-button-previous {
@@ -23,26 +22,21 @@ nav#archive-nav {
   content: ">";
 }
 
-.slides-parent-container {
-  height: inherit;
+.slides-container {
+  height: 1em;
   overflow: hidden;
   text-align: center;
 }
 
-.slides-container {
-  height: inherit;
-}
-
-/*
-  All visible slides must have a margin left 1em, but the 1st one. Could not achieve this first-child or nth-child (not pertinent or not always supported)
-  Workaround as suggested here : https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class?answertab=trending#tab-top
-  => set all visible slides margin left 0, but 1em for those which follow a visible slide...  
-*/
 .slide {
   display: inline-block;
   margin-left: 0;
 }
 
-.slide ~ .slide {
+/* 
+All not retired slides, but the 1st one, have a margin left 1em
+Could not achieve this with *-child css functions; had the trick from https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class?answertab=trending#tab-top
+*/
+.slide:not([data-slide-retired]) ~ .slide:not([data-slide-retired]) {
   margin-left: 1em;
 }
