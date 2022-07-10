@@ -63,6 +63,9 @@ function setSliderButtonsState(slider: HTMLElement) {
       } else {
         lastVisibleSlideOrder = slideOrder;
       }
+    } else if (lastVisibleSlideOrder > -1) {
+      // If we've reach a none visible slide, and the last visible slide is known, we have all necessary information : don't loop further
+      break;
     }
   }
   
@@ -70,6 +73,11 @@ function setSliderButtonsState(slider: HTMLElement) {
   nextButton.disabled = lastVisibleSlideOrder == slides.length - 1;
 }
 
+/**
+ * Resize observer to plug with a slider.
+ * 
+ * Will recompute the previous and next buttons states, as when the slider is resized, the list of visible and invisible slides may be affected.
+ */
 const sliderResizeObserver = new ResizeObserver(elements => {
   elements.forEach(element => {
     setSliderButtonsState(element.target as HTMLElement);
