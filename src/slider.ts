@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * Delcare an element as a slider : add the slides elements as children, plug the inherent behaviours.
- * 
- * Each slide will be provided with a new 'data-slide-order' attribute which value is the position of the slide in the list (starting at 0)
+ * Declare an element as a slider : build the necessary elements tree, add the slides elements, plug the inherent behaviours.
  * 
  * @see {@link styles/slider.css}
  * 
@@ -11,8 +9,22 @@
  * @param {Array<HTMLElement>} slides The slides to add to the slider.
  */
 function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
-  const slidesContainer = <HTMLElement> slider.getElementsByClassName('slides-container')[0];
-  if (slidesContainer == null) throw "Missing slides-container element in slider";
+  const previousButton = document.createElement('button');
+  previousButton.type = 'button';
+  previousButton.className = 'slider-button-previous';
+  previousButton.innerText = '<';
+  const slidesParentContainer = document.createElement('div');
+  slidesParentContainer.className = 'slides-parent-container';
+  const slidesContainer = document.createElement('div');
+  slidesContainer.className = 'slides-container';
+  slidesParentContainer.appendChild(slidesContainer);
+  const nextButton = document.createElement('button');
+  nextButton.type = 'button';
+  nextButton.className = 'slider-button-next';
+  nextButton.innerText = '>';
+
+  slider.classList.add('slider');
+  slider.append(previousButton, slidesParentContainer, nextButton);
 
   slidesContainer.append(...slides.map(
       (slide: HTMLElement, order: Number) => {
@@ -27,7 +39,7 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>) {
 }
 
 /**
- * Enable or disable the previous and next buttons from either side of a slider, according to slides that are outside the visible content of the slider.
+ * Enable or disable the previous and next buttons of a slider, according to slides that are outside the visible content of the slider.
  * 
  * @param {HTMLElement} slider The slider element.
  */
