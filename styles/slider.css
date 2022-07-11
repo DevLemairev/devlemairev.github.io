@@ -31,6 +31,10 @@ nav#archive-nav {
   position: relative;
 }
 
+/*
+  All slides, but the 1st one, have a margin left 0.5em
+  Could not achieve this with *-child css functions; had the very good trick from https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class?answertab=trending#tab-top
+*/
 .slide ~ .slide {
   margin-left: 0.5em;
 }

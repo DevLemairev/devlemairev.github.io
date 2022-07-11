@@ -33,8 +33,8 @@
             <section>
                 <h2>&Agrave; propos de cette page</h2>
                 <p>
-                    Après quelques lectures académiques je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette présente page est hébergée, pour un double objectif : mettre en pratique mon apprentissage du front, et me constituer une vitrine de présentation.
-                    Tout ceci en constante évolution : la page évoluera au gré de mon cheminement.
+                    Après quelques lectures académiques je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette présente page est hébergée,
+                    pour un double objectif : mettre en pratique mon apprentissage du front, et me constituer une vitrine de présentation.
                 </p>
                 <article id="art-5">
                     <h4>Historique</h4>
@@ -49,7 +49,7 @@
                     <script>
                         declareSlider(
                             document.getElementById('archive-nav-slider'),
-                            [ /* Here the available archived versions, as string labels to be used for anchors generation */ ]
+                            [ '1.0.0', '1.0.1' ]
                             .map(version => {
                                 const anchor = document.createElement('a');
                                 anchor.rel = "nofollow";
@@ -60,11 +60,27 @@
                             2
                         );
                     </script>
-                    <div class="info">
-                        Les versions antérieures à la fonctionnalité d&apos;historique sont ici
+                    <p>
+                        L&apos;implémentation du carrousel (widget permettant de naviguer parmi les versions d'archive disponible) m&apos;a permis de mettre en pratique beaucoup de choses.
+                        Quelques remarques à propos de l&apos;implémentation (voir plus bas les ressources) :
+                    </p>
+                    <ul>
+                        <li><p>
+                            La 1ère grosse difficulté a été de pouvoir aligner dans un seul <code>div</code>, sans retour à la ligne, tout le contenu du widget.
+                            Les clés ont été les directives <code>display: inline-block</code> (évite les ruptures de ligne avant et après un élément <em>block</em>),
+                            <code>overflow: hidden</code> et <code>width: calc(100% - 3em)</code> (limite l&apos;affichage du contenu d'un élément à sa largeur déclarée, le contenu en trop étant caché)
+                        </p></li>
+                        <li><p>
+                            Côté code j&apos;ai rapidement décidé d&apos;écrire en Typescript plutôt que Javascript :
+                            c&apos;était l&apos;occasion de s&apos;y mettre car une fois l&apos;IDE correctement configuré c&apos;est un gain de temps énorme en codage et en test / debug
+                            et aussi d&apos;apprentissage (ayant pratiqué pendant longtemps des langages typés et orientés objet tels que Delphi ou Java je savais l&apos;intérêt de passer à Typescript rapidement)
+                        </p></li>
+                    </ul>
+                    <div class="resource">
+                        Les ressources pour le carrousel
                         <ul>
-                            <li><a href="snapshot/1.0.0" rel="nofollow">1.0.0</a></li>
-                            <li><a href="snapshot/1.0.1" rel="nofollow">1.0.1</a></li>
+                            <li><a href="styles/slider.css" target="_blank">Feuille de style</a></li>
+                            <li><a href="src/slider.ts" target="_blank">Script Typescript</a></li>
                         </ul>
                     </div>
                 </article>
