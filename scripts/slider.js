@@ -9,9 +9,14 @@
  * @param {number} slideStep The amount of em to shift when clicking on previous / next buttons.
  */
 function declareSlider(slider, slides, slideStep) {
+    /*
+      Disable or enable the shift controls (previous / next buttons),
+      according to currently visible slides.
+    */
     const shiftControlsEnabler = function (slider) {
         const slidesContainer = slider.getElementsByClassName('slides')[0];
         const slides = slidesContainer.getElementsByClassName('slide');
+        // Check which are the 1st and last visible slides
         let firstSlideVisible = -1, lastSlideVisible = -1;
         for (let j = 0; j < slides.length; j++) {
             const slide = slides[j];
@@ -23,10 +28,11 @@ function declareSlider(slider, slides, slideStep) {
                     lastSlideVisible = j;
                 }
             }
-            else if (lastSlideVisible != -1) {
+            else if (lastSlideVisible != -1) /* If we already know 1st and last slides : no need to loop further */ {
                 break;
             }
         }
+        // Disable or enable the controls according the 1st and last visible slides
         const shiftControls = slider.querySelectorAll('.slider-previous, .slider-next');
         for (let j = 0; j < shiftControls.length; j++) {
             const shiftControl = shiftControls[j];
@@ -46,6 +52,9 @@ function declareSlider(slider, slides, slideStep) {
             }
         }
     };
+    /*
+      Apply a shift control action (shift to previous or next slide)
+    */
     const shiftControlClickEventListener = function (event) {
         const target = event.target;
         const slider = target.closest('.slider');
