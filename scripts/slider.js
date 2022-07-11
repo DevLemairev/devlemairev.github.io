@@ -6,119 +6,99 @@
  *
  * @param {HTMLElement} slider The slider element.
  * @param {Array<HTMLElement>} slides The slides to add to the slider.
+ * @param {number} slideStep The amount of em to shift when clicking on previous / next buttons.
  */
-function declareSlider(slider, slides) {
+function declareSlider(slider, slides, slideStep) {
+    const shiftControlsEnabler = function (slider) {
+        const slidesContainer = slider.getElementsByClassName('slides')[0];
+        const slides = slidesContainer.getElementsByClassName('slide');
+        let firstSlideVisible = -1, lastSlideVisible = -1;
+        for (let j = 0; j < slides.length; j++) {
+            const slide = slides[j];
+            if (slide.offsetLeft >= slidesContainer.offsetLeft && slide.offsetLeft + slide.offsetWidth <= slidesContainer.offsetLeft + slidesContainer.offsetWidth) {
+                if (firstSlideVisible == -1) {
+                    firstSlideVisible = j;
+                }
+                else {
+                    lastSlideVisible = j;
+                }
+            }
+            else if (lastSlideVisible != -1) {
+                break;
+            }
+        }
+        const shiftControls = slider.querySelectorAll('.slider-previous, .slider-next');
+        for (let j = 0; j < shiftControls.length; j++) {
+            const shiftControl = shiftControls[j];
+            let shiftControlEnabled = true;
+            if (shiftControl.classList.contains('slider-previous')) {
+                shiftControlEnabled = firstSlideVisible > 0;
+            }
+            else {
+                shiftControlEnabled = lastSlideVisible < slides.length - 1;
+            }
+            ;
+            if (shiftControlEnabled) {
+                shiftControl.removeAttribute("disabled");
+            }
+            else {
+                shiftControl.setAttribute("disabled", "true");
+            }
+        }
+    };
+    const shiftControlClickEventListener = function (event) {
+        const target = event.target;
+        const slider = target.closest('.slider');
+        const slidesContainer = slider.getElementsByClassName('slides')[0];
+        const slides = slidesContainer.getElementsByClassName('slide');
+        const shiftPreviousControl = target.classList.contains('slider-previous');
+        for (let i = 0; i < slides.length; i++) {
+            const slide = slides[i];
+            let left = Number.parseFloat(slide.style.left);
+            if (isNaN(left)) {
+                if (shiftPreviousControl) {
+                    left = slideStep;
+                }
+                else {
+                    left = -slideStep;
+                }
+            }
+            else {
+                if (shiftPreviousControl) {
+                    left += slideStep;
+                }
+                else {
+                    left -= slideStep;
+                }
+            }
+            slide.style.left = left + "em";
+        }
+        shiftControlsEnabler(slider);
+    };
     const previousButton = document.createElement('button');
     previousButton.type = 'button';
-    previousButton.className = 'slider-button-previous';
+    previousButton.className = 'slider-previous';
     previousButton.ariaLabel = "Shift to one previous slide";
-    const slidesParentContainer = document.createElement('div');
-    slidesParentContainer.className = 'slides-parent-container';
+    previousButton.innerText = "<";
+    previousButton.addEventListener('click', shiftControlClickEventListener);
     const slidesContainer = document.createElement('div');
-    slidesContainer.className = 'slides-container';
-    slidesParentContainer.appendChild(slidesContainer);
+    slidesContainer.className = 'slides';
     const nextButton = document.createElement('button');
     nextButton.type = 'button';
-    nextButton.className = 'slider-button-next';
+    nextButton.className = 'slider-next';
     nextButton.ariaLabel = "Shift to one next slide";
+    nextButton.innerText = ">";
+    nextButton.addEventListener('click', shiftControlClickEventListener);
     slider.classList.add('slider');
-    slider.append(previousButton, slidesParentContainer, nextButton);
+    slider.append(previousButton, slidesContainer, nextButton);
+    new ResizeObserver(entries => {
+        for (let i = 0; i < entries.length; i++) {
+            shiftControlsEnabler(entries[i].target);
+        }
+    }).observe(slider);
     slidesContainer.append(...slides.map((slide, order) => {
         slide.classList.add('slide');
         return slide;
     }));
-    computeFirstAndLastVisibleSlides(slider);
-    setSliderButtonsAvailability(slider);
-    sliderResizeObserver.observe(slider);
-}
-/**
- * Claculate the order of the 1st and last visible slides.
- *
- * @param {HTMLElement} slider The slider element.
- */
-function computeFirstAndLastVisibleSlides(slider) {
-    // We check if there are slides remaining before and after the currently visible slides
-    let firstVisibleSlideOrder = -1, lastVisibleSlideOrder = -1;
-    const slides = slider.getElementsByClassName('slide');
-    for (let i = 0; i < slides.length; i++) {
-        const slide = slides[i];
-        if (slide.offsetTop == slider.offsetTop) {
-            if (firstVisibleSlideOrder == -1) {
-                firstVisibleSlideOrder = i;
-                // Case there is only one slide visible
-                if (i == slides.length - 1) {
-                    lastVisibleSlideOrder = i;
-                }
-            }
-            else {
-                lastVisibleSlideOrder = i;
-            }
-        }
-        else if (lastVisibleSlideOrder > -1) {
-            // If we've reached a none visible slide, and the last visible slide is known, we have all necessary information : don't loop further
-            break;
-        }
-    }
-    slider[Symbol.for('FirstVisibleSlideOrder')] = firstVisibleSlideOrder;
-    slider[Symbol.for('LastVisibleSlideOrder')] = lastVisibleSlideOrder;
-}
-/**
- *
- * @param {HTMLElement} slider The slider element.
- */
-function setSliderButtonsAvailability(slider) {
-    const slidesContainer = slider.getElementsByClassName('slides-container')[0];
-    if (slidesContainer == null)
-        throw "Missing slides-container element in slider";
-    const previousButton = slider.getElementsByClassName('slider-button-previous')[0];
-    if (previousButton == null)
-        throw "Missing slider-button-previous element in slider";
-    const nextButton = slider.getElementsByClassName('slider-button-next')[0];
-    if (nextButton == null)
-        throw "Missing slider-button-next element in slider";
-    previousButton.disabled = slider[Symbol.for('FirstVisibleSlideOrder')] <= 0;
-    nextButton.disabled = slider[Symbol.for('LastVisibleSlideOrder')] == slidesContainer.getElementsByClassName('slide').length - 1;
-}
-/**
- * Resize observer to plug with a slider.
- *
- * Will recompute the previous and next buttons states, because when the slider is resized the list of visible and invisible slides may be affected.
- * Thus depending of the visible slides includes the 1st and / or last one, we have to enable or not the next and previous buttons.
- */
-const sliderResizeObserver = new ResizeObserver(elements => {
-    elements.forEach(element => {
-        const slider = element.target;
-        computeFirstAndLastVisibleSlides(slider);
-        setSliderButtonsAvailability(slider);
-    });
-});
-/**
- * Make the nth slide the first visible slide.
- *
- * @param {HTMLElement} slider The slider element.
- * @param {number} slideOrder The order of the slide to shift to next.
- */
-function shiftToNthSlide(slider, slideOrder) {
-    // si slideOrder > firstVisible, et que le lastVisible est le dernier de la liste alors stop !
-    const slides = slider.getElementsByClassName('slide');
-    if (slideOrder < 0 || slideOrder > slides.length - 1)
-        throw 'slideOrder out of range';
-    for (let i = 0; i < slides.length; i++) {
-        // If both the target slide and the lastest of the collection are already visible, we don't loop further
-        if (slider[Symbol.for('LastVisibleSlideOrder')] == slides.length - 1 && slideOrder > slider[Symbol.for('FirstVisibleSlideOrder')]) {
-            break;
-        }
-        const slide = slides[i];
-        if (i < slideOrder) {
-            slide.style.display = 'none';
-            slide.setAttribute('data-slide-retired', "true");
-        }
-        else {
-            slide.style.display = 'inline-block';
-            slide.removeAttribute('data-slide-retired');
-        }
-        computeFirstAndLastVisibleSlides(slider);
-    }
-    setSliderButtonsAvailability(slider);
 }
 //# sourceMappingURL=slider.js.map
