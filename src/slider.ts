@@ -5,9 +5,9 @@
  * 
  * @see {@link styles/slider.css}
  * 
- * @param {HTMLElement} slider The slider element.
- * @param {Array<HTMLElement>} slides The slides to add to the slider.
- * @param {number} slideStep The amount of em to shift when clicking on previous / next buttons.
+ * @param slider The slider element.
+ * @param slides The slides to add to the slider.
+ * @param slideStep The amount of em to shift when clicking on previous / next buttons.
  */
 function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>, slideStep: number) {
 

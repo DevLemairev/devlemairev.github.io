@@ -61,26 +61,42 @@
                         );
                     </script>
                     <p>
-                        L&apos;implémentation du carrousel (widget permettant de naviguer parmi les versions d'archive disponible) m&apos;a permis de mettre en pratique beaucoup de choses.
-                        Quelques remarques à propos de l&apos;implémentation (voir plus bas les ressources) :
+                        L&apos;implémentation du carrousel (le widget permettant de naviguer parmi les versions) m&apos;a permis de mettre en pratique beaucoup de choses.
+                        Quelques remarques à son propos (voir plus bas les ressources) :
                     </p>
                     <ul>
+                        <li>
+                            <p>
+                                Côté présentation (html / css)
+                                <ul>
+                                    <li>le widget est composé de : un <code>button</code> &quot;&lt;&quot; pour décaler les slides vers la gauche, un <code>div</code> contenant les slides, un <code>button</code> &quot;&gt;&quot; pour décaler les slides vers la droite</li>
+                                    <li>règle css <code class="important">display: inline-block</code> sur <code class="important">.slider > *</code> pour aligner les éléments du widget (évite les ruptures de ligne avant et après un élément nativement <em>block</em>, tout en permettant de le dimensionner)</li>
+                                    <li>
+                                        règles css <code class="important">overflow: hidden</code> et <code class="important">width: calc(100% - 3em)</code><sup>1</sup> sur le <code>div</code> contenant les slides (limite l&apos;affichage le contenu de élément à sa largeur déclarée, le contenu débordant étant caché)
+                                        <br/><sup>1</sup> : <em>3em</em> est la largeur additionnée des boutons &quot;<&quot; et &quot;>&quot;, que l'on retire donc des 100% (largeur totale disponible dans l'élément parent)
+                                    </li>
+                                    <li>règle css <code class="important">position: relative</code> sur chaque slide, pour pouvoir les décaler par rapport à leur emplacement naturel (décalage horizontal avec la propriété css <code>left</code> des slides, positionnée par code quand on clique sur les boutons &quot;<&quot; et &quot;>&quot;)</li>
+                                </ul>
+                            </p>
+                        </li>
                         <li><p>
-                            La 1ère grosse difficulté a été de pouvoir aligner dans un seul <code>div</code>, sans retour à la ligne, tout le contenu du widget.
-                            Les clés ont été les directives <code>display: inline-block</code> (évite les ruptures de ligne avant et après un élément <em>block</em>),
-                            <code>overflow: hidden</code> et <code>width: calc(100% - 3em)</code> (limite l&apos;affichage du contenu d'un élément à sa largeur déclarée, le contenu en trop étant caché)
-                        </p></li>
-                        <li><p>
-                            Côté code j&apos;ai rapidement décidé d&apos;écrire en Typescript plutôt que Javascript :
-                            c&apos;était l&apos;occasion de s&apos;y mettre car une fois l&apos;IDE correctement configuré c&apos;est un gain de temps énorme en codage et en test / debug
-                            et aussi d&apos;apprentissage (ayant pratiqué pendant longtemps des langages typés et orientés objet tels que Delphi ou Java je savais l&apos;intérêt de passer à Typescript rapidement)
-                        </p></li>
+                                Côté code
+                                <ul>
+                                    <li>j&apos;ai rapidement décidé d&apos;écrire en TypeScript plutôt que JavaScript :
+                                    c&apos;était l&apos;occasion de s&apos;y mettre car une fois l&apos;IDE correctement configuré c&apos;est un gain conséquent (ayant pratiqué pendant longtemps des langages typés tels que C++ ou Java je savais tout l&apos;intérêt de passer à TypeScript rapidement)
+                                    <br/>Voir <a href="https://docs.microsoft.com/en-us/learn/modules/typescript-get-started/2-TypeScript-overview" class="external">cet article</a> dans lequel Microsoft (l&apos;inventeur de TypeScript) décrit l&apos;intérêt du langage.
+                                    </li>
+                                    <li>utilisation du <em>pattern</em> <code class="important">ResizeObserver</code> pour mettre à jour la disponibilité des boutons &quot;<&quot; et &quot;>&quot; (suivant la taille du <code>div</code> conteneur tous les slides ne sont pas visibles à un instant; on peut en découvrir d&apos;autres qui sont dans le contenu caché de ce conteneur)</li>
+                                    <li>ce widget carousel est un candidat idéal pour s&apos;exercer à faire un élément html <em>custom</em>, et certainement pour un 1er pas vers un framework comme React : à suivre...</li>
+                                </ul>
+                            </p>
+                        </li>
                     </ul>
                     <div class="resource">
                         Les ressources pour le carrousel
                         <ul>
                             <li><a href="styles/slider.css" target="_blank">Feuille de style</a></li>
-                            <li><a href="src/slider.ts" target="_blank">Script Typescript</a></li>
+                            <li><a href="src/slider.ts" target="_blank">Script TypeScript</a></li>
                         </ul>
                     </div>
                 </article>
@@ -99,7 +115,7 @@
                         <h4>Grille stylée sans grid, éléments générés par js</h4>
                         <p>
                             Mon objectif est de rendre une grille en utilisant des directives css de base (pas de grid),
-                            et d'utiliser Javascript pour la génération des cases.
+                            et d'utiliser JavaScript pour la génération des cases.
                         </p>
                         <div id="board18"></div>
                         <link href="styles/custom18.css" rel="stylesheet" type="text/css">
@@ -115,14 +131,14 @@
                             En encapsulant les cases d'une ligne dans un <code>div</code>, élément nativement <em>block</em>, je me suis affranchi de cet effet <em>inline</em>.
                         </p>
                         <p>
-                            Le résultat est correct, et je peux jouer <em>presque</em> facilement sur le nombre de cases du plateau. Presque, car si côté Javascript ce nombre est simplement un argument de la fonction <code>drawSquareGrid</code> (il pourrait être paramétrable via une propriété <code>data-nb-case-per-row</code> de l'élément plateau, par exemple),
+                            Le résultat est correct, et je peux jouer <em>presque</em> facilement sur le nombre de cases du plateau. Presque, car si côté JavaScript ce nombre est simplement un argument de la fonction <code>drawSquareGrid</code> (il pourrait être paramétrable via une propriété <code>data-nb-case-per-row</code> de l'élément plateau, par exemple),
                             il faut encore modifier les directives css <code>height: 10%;</code> et <code>width: 10%;</code> &ndash; 10% car 10 cases par côté codé en dur.
                         </p>
                         <div class="resource">
                             Les ressources
                             <ul>
                                 <li><a href="styles/custom18.css" target="_blank">Feuille de style</a></li>
-                                <li><a href="scripts/custom18.js" target="_blank">Script Javascript</a></li>
+                                <li><a href="scripts/custom18.js" target="_blank">Script JavaScript</a></li>
                             </ul>
                         </div>
                     </article>
@@ -150,7 +166,7 @@
                             Les ressources
                             <ul>
                                 <li><a href="styles/custom63.css" target="_blank">Feuille de style</a></li>
-                                <li><a href="scripts/custom63.js" target="_blank">Script Javascript</a></li>
+                                <li><a href="scripts/custom63.js" target="_blank">Script JavaScript</a></li>
                             </ul>
                         </div>
                     </article>
@@ -175,7 +191,7 @@
                             Les ressources
                             <ul>
                                 <li><a href="styles/custom103.css" target="_blank">Feuille de style</a></li>
-                                <li><a href="scripts/custom103.js" target="_blank">Script Javascript</a></li>
+                                <li><a href="scripts/custom103.js" target="_blank">Script JavaScript</a></li>
                             </ul>
                         </div>
                     </article>
@@ -216,7 +232,7 @@
                 </p>
                 <div class="info">
                     <ul>
-                        <li><a href="https://javascript.info/" class="external">The Modern JavaScript Tutorial : excellent tutoriel, complet, avec des exercices bien pensés</a></li>
+                        <li><a href="https://JavaScript.info/" class="external">The Modern JavaScript Tutorial : excellent tutoriel, complet, avec des exercices bien pensés</a></li>
                         <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="external">Références HTML de Mozilla</a></li>
                         <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="external">Références CSS de Mozilla</a></li>
                         <li><a href="https://validator.w3.org/unicorn/" class="external">Unicorn - Le Validateur unifié du W3C</a></li>
