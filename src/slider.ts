@@ -18,11 +18,15 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>, slideSte
   const shiftControlsEnabler = function(slider: HTMLElement) {
       const slidesContainer = <HTMLElement> slider.getElementsByClassName('slides')[0];
       const slides = <HTMLCollectionOf<HTMLElement>> slidesContainer.getElementsByClassName('slide');
-      // Check which are the 1st and last visible slides
+      // Check what are the 1st and last visible slides
       let firstSlideVisible = -1, lastSlideVisible = -1;
       for(let j = 0; j < slides.length; j++) {
         const slide = slides[j];
-        if (slide.offsetLeft >= slidesContainer.offsetLeft && slide.offsetLeft + slide.offsetWidth <= slidesContainer.offsetLeft + slidesContainer.offsetWidth) {
+        if (
+          slide.offsetLeft >= slidesContainer.offsetLeft && slide.offsetLeft <= slidesContainer.offsetLeft + slidesContainer.offsetWidth
+          &&
+          slide.offsetLeft + slide.offsetWidth >= slidesContainer.offsetLeft && slide.offsetLeft + slide.offsetWidth <= slidesContainer.offsetLeft + slidesContainer.offsetWidth
+        ) {
           if (firstSlideVisible == -1) {
             firstSlideVisible = j;
           } else {
@@ -34,14 +38,14 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>, slideSte
       }
 
       // Disable or enable the controls according the 1st and last visible slides
-      const shiftControls = slider.querySelectorAll('.slider-previous, .slider-next');
+      const shiftControls = slider.querySelectorAll('.slider-control-previous, .slider-control-next');
       for (let j = 0; j < shiftControls.length; j++) {
         const shiftControl = shiftControls[j];
         let shiftControlEnabled = true;
-        if (shiftControl.classList.contains('slider-previous')) {
-          shiftControlEnabled = firstSlideVisible > 0;
+        if (shiftControl.classList.contains('slider-control-previous')) {
+          shiftControlEnabled = firstSlideVisible > 0 || firstSlideVisible == -1 && lastSlideVisible == -1;
         } else {
-          shiftControlEnabled = lastSlideVisible < slides.length - 1;
+          shiftControlEnabled = firstSlideVisible > -1 && lastSlideVisible < slides.length - 1;
         };
         if (shiftControlEnabled) {
           shiftControl.removeAttribute("disabled");
@@ -59,7 +63,7 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>, slideSte
     const slider = <HTMLElement> target.closest('.slider');
     const slidesContainer = slider.getElementsByClassName('slides')[0];
     const slides = <HTMLCollectionOf<HTMLElement>> slidesContainer.getElementsByClassName('slide');
-    const shiftPreviousControl = target.classList.contains('slider-previous');
+    const shiftPreviousControl = target.classList.contains('slider-control-previous');
     for(let i = 0; i < slides.length; i++) {
       const slide = slides[i];
       let left = Number.parseFloat(slide.style.left);
@@ -83,17 +87,15 @@ function declareSlider(slider: HTMLElement, slides: Array<HTMLElement>, slideSte
 
   const previousButton = document.createElement('button');
   previousButton.type = 'button';
-  previousButton.className = 'slider-previous';
-  previousButton.ariaLabel = "Shift to one previous slide"
-  previousButton.innerText = "<";
+  previousButton.className = 'slider-control-previous';
+  previousButton.ariaLabel = "Shift to one previous slide";
   previousButton.addEventListener('click', shiftControlClickEventListener); 
   const slidesContainer = document.createElement('div');
   slidesContainer.className = 'slides';
   const nextButton = document.createElement('button');
   nextButton.type = 'button';
-  nextButton.className = 'slider-next';
+  nextButton.className = 'slider-control-next';
   nextButton.ariaLabel = "Shift to one next slide";
-  nextButton.innerText = ">";
   nextButton.addEventListener('click', shiftControlClickEventListener); 
 
   slider.classList.add('slider');

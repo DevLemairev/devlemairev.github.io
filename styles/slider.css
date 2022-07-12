@@ -14,10 +14,18 @@ nav#archive-nav {
   margin: 0;
 }
 
-.slider-previous,
-.slider-next {
+.slider-control-previous,
+.slider-control-next {
   width: 1em;
   text-align: center;
+}
+
+.slider-control-previous::after {
+  content: "<";
+}
+
+.slider-control-next::after {
+  content: ">";
 }
 
 .slides {
