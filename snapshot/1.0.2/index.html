@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lemaire Vincent</title>
+
+        <meta name="author" content="Lemaire Vincent">
+        <meta name="description" content="Portfolio de Lemaire Vincent, développeur web.">
+
+        <link rel="icon" href="favicon.ico">
+        <link href="styles/main.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/logo.png" alt="Logo dev Lemaire Vincent" />
+            </div>
+            <div class="hook">
+                Développeur backend en exercice depuis 1999 (services, industrie, web) Mon parcours m&apos;a conduit à envisager une réorientation vers le développement web frontend, que j'ai pu aborder très occasionnellement dans ma vie professionnelle, sans réelles bases théoriques.
+            </div>
+        </header>
+        <main>
+            <section>
+                <h2>&Agrave; propos de moi</h2>
+                <p>
+                    
+                </p>
+                <article id="art-4">
+                    TODO CV
+                </article>
+            </section>
+            <section>
+                <h2>&Agrave; propos de cette page</h2>
+                <p>
+                    Après quelques lectures académiques je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette présente page est hébergée,
+                    pour un double objectif : mettre en pratique mon apprentissage du front, et me constituer une vitrine de présentation.
+                </p>
+                <article id="art-5">
+                    <h4>Historique</h4>
+                    <p>
+                        Les différents versions de cette page sont consultables ici.
+                    </p>
+                    <nav id="archive-nav" aria-label="Navigate through site archived versions">
+                        <div id="archive-nav-slider" aria-label="A multi slides slider presenting site archived version as a slide with link to this version"></div>
+                    </nav>
+                    <link href="styles/slider.css" rel="stylesheet" type="text/css">
+                    <script src="scripts/slider.js"></script>
+                    <script>
+                        declareSlider(
+                            document.getElementById('archive-nav-slider'),
+                            [ '1.0.0', '1.0.1' ]
+                            .map(version => {
+                                const anchor = document.createElement('a');
+                                anchor.rel = "nofollow";
+                                anchor.href = `snapshot/${version}`;
+                                anchor.text = version;
+                                return anchor;
+                            }),
+                            2
+                        );
+                    </script>
+                    <p>
+                        L&apos;implémentation du carrousel (le widget permettant de naviguer parmi les versions) m&apos;a permis de mettre en pratique beaucoup de choses.
+                        Quelques remarques à son propos (voir plus bas les ressources) :
+                    </p>
+                    <ul>
+                        <li>
+                            <p>
+                                Côté présentation (html / css)
+                                <ul>
+                                    <li>le widget est composé de : un <code>button</code> &quot;&lt;&quot; pour décaler les slides vers la gauche, un <code>div</code> contenant les slides, un <code>button</code> &quot;&gt;&quot; pour décaler les slides vers la droite</li>
+                                    <li>règle css <code><strong>display: inline-block</strong></code> sur <code><strong>.slider &gt; *</strong></code> pour aligner les éléments du widget (évite les ruptures de ligne avant et après un élément nativement <em>block</em>, tout en permettant de le dimensionner)</li>
+                                    <li>
+                                        règles css <code><strong>overflow: hidden</strong></code> et <code><strong>width: calc(100% - 3em)</strong></code><sup>1</sup> sur le <code>div</code> contenant les slides (limite l&apos;affichage le contenu de l&apos;élément à sa largeur déclarée, le contenu débordant étant caché)
+                                        <br/><sup>1</sup> : <em>3em</em> est la largeur additionnée des boutons &quot;<&quot; et &quot;>&quot;, que l'on retire donc des 100% (largeur totale disponible dans l'élément parent)
+                                    </li>
+                                    <li>règle css <code><strong>position: relative</strong></code> sur chaque slide, pour pouvoir les décaler par rapport à leur emplacement naturel (décalage horizontal avec la propriété css <code><strong>left</strong></code> des slides, positionnée par code quand on clique sur les boutons &quot;<&quot; et &quot;>&quot;)</li>
+                                </ul>
+                            </p>
+                        </li>
+                        <li><p>
+                                Côté code
+                                <ul>
+                                    <li>j&apos;ai rapidement décidé d&apos;écrire en TypeScript plutôt que JavaScript :
+                                    c&apos;était l&apos;occasion de s&apos;y mettre car une fois l&apos;IDE correctement configuré c&apos;est un gain conséquent (ayant pratiqué pendant longtemps des langages typés tels que C++ ou Java je savais tout l&apos;intérêt de passer à TypeScript rapidement)
+                                    <br/>Voir <a href="https://docs.microsoft.com/en-us/learn/modules/typescript-get-started/2-TypeScript-overview" class="external">cet article</a> dans lequel Microsoft (l&apos;inventeur de TypeScript) décrit l&apos;intérêt du langage.
+                                    </li>
+                                    <li>utilisation du <em>pattern</em> <code><strong>ResizeObserver</strong></code> pour mettre à jour la disponibilité des boutons &quot;<&quot; et &quot;>&quot; (suivant la taille du <code>div</code> conteneur tous les slides ne sont pas visibles à un instant; on peut en découvrir d&apos;autres qui sont dans le contenu caché de ce conteneur)</li>
+                                    <li>ce widget carousel est un candidat idéal pour s&apos;exercer à faire un élément html <em>custom</em>, et certainement pour un 1er pas vers un framework comme React : à suivre...</li>
+                                </ul>
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="resource">
+                        Les ressources pour le carrousel
+                        <ul>
+                            <li><a href="styles/slider.css" target="_blank">Feuille de style</a></li>
+                            <li><a href="src/slider.ts" target="_blank">Script TypeScript</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+            <section>
+                <h2>Exercices pratiques</h2>
+                <p>
+                    TODO blabla
+                </p>
+                <section>
+                    <h3>Dessine moi une grille</h3>
+                    <p>
+                        Mes premiers travaux pratiques : après avoir longuement réfléchi à imaginer un jeu de plateau, j&apos;ai revu mes objectifs drastiquement à la baisse : déjà, il faut que je puisse <em>dessiner</em> un plateau... une grille en fait ! J&apos;inventerai le <a href="https://www.tetrisgratuit.fr/" class="external">Tetris</a> du futur plus tard !
+                    </p>
+                    <article id="art-0" class="topic-main-css">
+                        <h4>Grille stylée sans grid, éléments générés par js</h4>
+                        <p>
+                            Mon objectif est de rendre une grille en utilisant des directives css de base (pas de grid),
+                            et d'utiliser JavaScript pour la génération des cases.
+                        </p>
+                        <div id="board18"></div>
+                        <link href="styles/custom18.css" rel="stylesheet" type="text/css">
+                        <script src="scripts/custom18.js"></script>
+                        <p>
+                            Je voulais avoir une maîtrise exacte de la taille du plateau, et que le calcul de la taille des cases ne soit pas affecté par les marges et les bordures.
+                        </p>
+                        <p>
+                            Pour ce dernier point, les éléments déterminants ont été l'utilisation de la directive css <code>box-sizing: border-box</code>,
+                            ainsi que l'encapsulation de chaque ligne de la grille dans un <code>div</code> dédié.
+                            En effet sans cette encapsulation, les cases, chacune rendue par un <code>div</code> et par une directive css <code>display: inline-block</code>,
+                            s'alignaient correctement par lignes, mais il restait des marges verticales entre celles-ci. Je pense que ces marges étaient induites par le <em>inline</em> du <code>inline-block</code>.
+                            En encapsulant les cases d'une ligne dans un <code>div</code>, élément nativement <em>block</em>, je me suis affranchi de cet effet <em>inline</em>.
+                        </p>
+                        <p>
+                            Le résultat est correct, et je peux jouer <em>presque</em> facilement sur le nombre de cases du plateau. Presque, car si côté JavaScript ce nombre est simplement un argument de la fonction <code>drawSquareGrid</code> (il pourrait être paramétrable via une propriété <code>data-nb-case-per-row</code> de l'élément plateau, par exemple),
+                            il faut encore modifier les directives css <code>height: 10%;</code> et <code>width: 10%;</code> &ndash; 10% car 10 cases par côté codé en dur.
+                        </p>
+                        <div class="resource">
+                            Les ressources
+                            <ul>
+                                <li><a href="styles/custom18.css" target="_blank">Feuille de style</a></li>
+                                <li><a href="scripts/custom18.js" target="_blank">Script JavaScript</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article id="art-1" class="topic-main-css">
+                        <h4>Grille <em>paramétrable</em>, sans grid, éléments générés par js</h4>
+                        <p>
+                            L&apos;idée est de reprendre <a href="#art-0">l&apos;implémentation précédente</a>, pour que le nombre de cases soit facilement paramétrable, avec uniquement l&apos;argument <code>nbCellPerRow</code> de la fonction <code>drawSquareGrid</code>
+                            <br/>&rightarrow; pas de style <code>height</code> et <code>width</code> en dur dans le css (ou alors valeur calculée en fonction du nombre de cases par côté)
+                            <br/>&rightarrow; découpler au maximum le modèle (js) de la vue (html et css)
+                        </p>
+                        <div id="board63"></div>
+                        <link href="styles/custom63.css" rel="stylesheet" type="text/css">
+                        <script src="scripts/custom63.js"></script>
+                        <script>
+                            drawSquareGrid2(document.getElementById('board63'), 5);
+                        </script>
+                        <p>
+                            J&apos;ai amélioré le découplage modèle - vue notamment pour l&apos;application des bordures haute et gauche des cases les plus en haut, et les plus à gauche. Voir les ressources utilisées (lien ci-dessous)
+                            Mais je n&apos;ai pu m&apos;affranchir de positionner dans le code js les <code>width</code> et <code>height</code> des cellules.
+                            Impossible de le faire dans la css, car ce sont des valeurs calculées suivant le nombre de cellule par côté.
+                            L&apos;utilisation de la fonction css <code>counter</code> permet de calculer ce nombre; j&apos;espérais ensuite pouvoir l&apos;utiliser avec la fonction <code>calc</code> pour déterminer la valeur... mais sans succés (je pense que cette fonction est avant tout destinée à faciliter les opérations avec des unités de longueur différentes)
+                            On va considérer que le résultat est acceptable, cela reste un exercice, qui m&apos;a permis de me frotter encore un peu plus aux css !
+                        </p>
+                        <div class="resource">
+                            Les ressources
+                            <ul>
+                                <li><a href="styles/custom63.css" target="_blank">Feuille de style</a></li>
+                                <li><a href="scripts/custom63.js" target="_blank">Script JavaScript</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article id="art-3" class="topic-main-css">
+                        <h4>Grille paramétrable, <em>avec grid</em>, éléments générés par js</h4>
+                        <p>
+                            Jusqu&apos;à présent j&apos;ai voulu dessiner une grille sans le layout css grid (<a href="#art-0">ici</a> et <a href="#art-3">ici</a>), afin de travailler des fondamentaux css.
+                        </p>
+                        <p>
+                            Outre la documentation, j&apos;ai découvert ce petit tutoriel <a href="https://cssgridgarden.com/#fr" class="external">Grid Garden</a> qui permet de pratiquer ce layout de manière ludique (dans une certaine mesure, ça ne remplace pas un bon Fortnite !)
+                        </p>
+                        <div id="board103"></div>
+                        <link href="styles/custom103.css" rel="stylesheet" type="text/css">
+                        <script src="scripts/custom103.js"></script>
+                        <script>
+                            drawSquareGrid3(document.getElementById('board103'), 15);
+                        </script>
+                        <p>
+                            Le layout grid va bien au-delà de ce que j&apos;en ai utilisé ici. Il a été imaginé pour pouvoir organiser du contenu sur une page selon une structure tabulaire (agencement en colonnes et lignes, beaucoup plus générique et souple que le traditionnel élément <code>table</code> qui de surcroît n&apos;a pas le rôle de structuration de page)
+                        </p>
+                        <div class="resource">
+                            Les ressources
+                            <ul>
+                                <li><a href="styles/custom103.css" target="_blank">Feuille de style</a></li>
+                                <li><a href="scripts/custom103.js" target="_blank">Script JavaScript</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <h2>Discutons implémentation</h2>
+                <p>
+                    Cette page présente une mise en pratique de mes connaissances. Toutes sont perfectibles et critiquables. Dans cette section je vais détailler certains points qui me paraissent intéressants pour le partage, et pour mieux rendre compte de mes approches et façons de faire.
+                </p>
+                <article id="art-2" class="topic-main-html topic-aside-charset">
+                    <h3>&Eacute;chapper les caractères HTML : oui mes lesquels ?</h3>
+                    <p>
+                        Très peu de caractères sont échappés dans le code html de cette page (par exemple é que je tape en clair pourrait être échappé <code>&amp;eacute;</code>), parce qu'elle déclare utiliser le jeu de caractères utf-8 grâce à la balise <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> dans le <code>header</code>.
+                        <br/>Ainsi, pour peu que le code html soit encodé en utf-8 (mon IDE est configuré pour cela), et que le navigateur qui lit cette page connaît utf-8, les caractères seront rendus tels que je les ai écrits (je considère que c&apos;est maintenant toujours le cas; la question de la compatibilité des navigateurs est un énorme sujet, je ne vise pas ici une couverture maximale)
+                    </p>
+                    <p>
+                        Pour être exhaustif, il faut s'assurer aussi que le serveur http ne surcharge pas la déclaration de la balise meta. Il peut le faire, en précisant le jeu de caractères dans une en-tête de réponse <code>Content-Type: text/html; charset=XXX</code> (<code>XXX</code> étant un code de jeu de caractères autre que utf-8, par ex. iso-8859-1)
+                        Ce serait fâcheux et... surprenant !
+                    </p>
+                    <p>
+                        La page <a href="https://www.w3.org/International/questions/qa-escapes#use" class="external">W3C - When escapes can be useful</a> explique très bien quand appliquer l&apos;échappement.
+                        On devine aisément que les caractères réservés à la syntaxe html doivent être échappés (&lt;, &gt; ...) L&apos;encodage utf-8 nous affranchit de devoir échapper pratiquement tous les autres caractères que nous n&apos;utiliserons jamais. Cependant, il peut être intéressant de le faire, pour apporter plus de sémantique (le tiret est un bon exemple : tiret d&apos;enumération, de réplique, d&apos;insistance) Je pense que ce peut être une bonne habitude de garder cette possibilité à l&apos;esprit, par exemple pour faciliter l&apos;accessibilité  d&apos;un texte (au sens d&apos;être adapté aux personnes à difficulté de lecture)
+                    </p>
+                    <div class="info">
+                        Liens utiles
+                        <ul>
+                            <li><a href="https://www.toptal.com/designers/htmlarrows/" class="external">A delightful reference for HTML Symbols, Entities and ASCII Character Codes</a></li>
+                            <li><a href="https://www.unicode.org/emoji/charts/full-emoji-list.html" class="external">Full Emoji List</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+            <section>
+                <h2>Boîte à liens</h2>
+                <p>
+                    TODO blabla
+                </p>
+                <div class="info">
+                    <ul>
+                        <li><a href="https://JavaScript.info/" class="external">The Modern JavaScript Tutorial : excellent tutoriel, complet, avec des exercices bien pensés</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="external">Références HTML de Mozilla</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="external">Références CSS de Mozilla</a></li>
+                        <li><a href="https://validator.w3.org/unicorn/" class="external">Unicorn - Le Validateur unifié du W3C</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h2>Mes outils, mon environnement</h2>
+                <p>
+                    TODO blabla
+                </p>
+                <article id="art-6">
+                    TODO VSCode, Live Server, Github pages
+                </article>
+            </section>
+        </main>
+    </body>
+</html>

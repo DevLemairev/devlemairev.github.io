@@ -1,0 +1,48 @@
+nav#archive-nav {
+  margin: 1em 0 1em 0;
+}
+
+.slider {
+  padding: 0;
+  margin: 0;
+}
+
+.slider > * {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.slider-control-previous,
+.slider-control-next {
+  width: 1em;
+  text-align: center;
+}
+
+.slider-control-previous::after {
+  content: "<";
+}
+
+.slider-control-next::after {
+  content: ">";
+}
+
+.slides {
+  overflow: hidden;
+  width: calc(100% - 3em);
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.slide {
+  position: relative;
+}
+
+/*
+  All slides, but the 1st one, have a margin left 0.5em
+  Could not achieve this with *-child css functions; had the very good trick from https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class?answertab=trending#tab-top
+*/
+.slide ~ .slide {
+  margin-left: 0.5em;
+}
