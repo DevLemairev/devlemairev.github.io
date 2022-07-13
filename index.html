@@ -3,44 +3,44 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lemaire Vincent</title>
+        <title>L'atelier de Vincent</title>
 
         <meta name="author" content="Lemaire Vincent">
-        <meta name="description" content="Portfolio de Lemaire Vincent, développeur web.">
+        <meta name="description" content="Site atelier de Lemaire Vincent, développeur senior web backend et services, débutant web frontend.">
 
         <link rel="icon" href="favicon.ico">
         <link href="styles/main.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
+    <body lang="fr">
         <header>
-            <div class="logo">
-                <img src="img/logo.png" alt="Logo dev Lemaire Vincent" />
-            </div>
-            <div class="hook">
-                Développeur backend en exercice depuis 1999 (services, industrie, web) Mon parcours m&apos;a conduit à envisager une réorientation vers le développement web frontend, que j'ai pu aborder très occasionnellement dans ma vie professionnelle, sans réelles bases théoriques.
-            </div>
+            <img src="img/lemaire-vincent-logo.png" alt="Logo dev Lemaire Vincent" />
+            <p>
+                Développeur depuis 1999 (services, web), je décide au printemps 2022 de reconsidérer mon orientation professionnelle.
+            </p>
+            <p>
+                Je veux continuer à développer, mais dans un contexte technique et social qui répondra mieux à mes besoins.
+            </p>
+            <p>
+                J&apos;en suis pour le moment à vouloir monter en compétence en web frontend. Ceci est mon atelier : l&apos;entrée est libre, promenez-vous à votre guise.
+            </p>
         </header>
         <main>
             <section>
-                <h2>&Agrave; propos de moi</h2>
-                <p>
-                    
-                </p>
-                <article id="art-4">
-                    TODO CV
-                </article>
-            </section>
-            <section>
                 <h2>&Agrave; propos de cette page</h2>
                 <p>
-                    Après quelques lectures académiques je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette présente page est hébergée,
-                    pour un double objectif : mettre en pratique mon apprentissage du front, et me constituer une vitrine de présentation.
+                    Après quelques lectures académiques je décide d&apos;utiliser <a href="https://pages.github.com/" class="external">GitHub Pages</a>, sur quoi cette page est hébergée,
+                    pour un double objectif : mettre en pratique mon apprentissage du front, et exposer au fil de l&apos;eau mes réalisations.
                 </p>
-                <article id="art-5">
-                    <h4>Historique</h4>
-                    <p>
-                        Les différents versions de cette page sont consultables ici.
-                    </p>
+                <p>
+                    TODO : parler de la structuration html (sémantique des balises et de la structure, accessibilité)
+                </p>
+                <article id="art-5" class="topic-main-css topic-main-typescript">
+                    <header>
+                        <h3>Historique</h3>
+                        <p>
+                            Les différents versions de cette page sont consultables ici.
+                        </p>
+                    </header>
                     <nav id="archive-nav" aria-label="Navigate through site archived versions">
                         <div id="archive-nav-slider" aria-label="A multi slides slider presenting site archived version as a slide with link to this version"></div>
                     </nav>
@@ -103,20 +103,19 @@
             </section>
             <section>
                 <h2>Exercices pratiques</h2>
-                <p>
-                    TODO blabla
-                </p>
                 <section>
                     <h3>Dessine moi une grille</h3>
                     <p>
                         Mes premiers travaux pratiques : après avoir longuement réfléchi à imaginer un jeu de plateau, j&apos;ai revu mes objectifs drastiquement à la baisse : déjà, il faut que je puisse <em>dessiner</em> un plateau... une grille en fait ! J&apos;inventerai le <a href="https://www.tetrisgratuit.fr/" class="external">Tetris</a> du futur plus tard !
                     </p>
                     <article id="art-0" class="topic-main-css">
-                        <h4>Grille stylée sans grid, éléments générés par js</h4>
-                        <p>
-                            Mon objectif est de rendre une grille en utilisant des directives css de base (pas de grid),
-                            et d'utiliser JavaScript pour la génération des cases.
-                        </p>
+                        <header>
+                            <h4>Grille stylée sans grid, éléments générés par js</h4>
+                            <p>
+                                Mon objectif est de rendre une grille en utilisant des directives css de base (pas de grid),
+                                et d'utiliser JavaScript pour la génération des cases.
+                            </p>
+                        </header>
                         <div id="board18"></div>
                         <link href="styles/custom18.css" rel="stylesheet" type="text/css">
                         <script src="scripts/custom18.js"></script>
@@ -132,7 +131,7 @@
                         </p>
                         <p>
                             Le résultat est correct, et je peux jouer <em>presque</em> facilement sur le nombre de cases du plateau. Presque, car si côté JavaScript ce nombre est simplement un argument de la fonction <code>drawSquareGrid</code> (il pourrait être paramétrable via une propriété <code>data-nb-case-per-row</code> de l'élément plateau, par exemple),
-                            il faut encore modifier les directives css <code>height: 10%;</code> et <code>width: 10%;</code> &ndash; 10% car 10 cases par côté codé en dur.
+                            il faut encore modifier les directives css <code>height: 10%;</code> et <code>width: 10%;</code> &hyphen; 10% car 10 cases par côté codé en dur.
                         </p>
                         <div class="resource">
                             Les ressources
@@ -143,12 +142,14 @@
                         </div>
                     </article>
                     <article id="art-1" class="topic-main-css">
-                        <h4>Grille <em>paramétrable</em>, sans grid, éléments générés par js</h4>
-                        <p>
-                            L&apos;idée est de reprendre <a href="#art-0">l&apos;implémentation précédente</a>, pour que le nombre de cases soit facilement paramétrable, avec uniquement l&apos;argument <code>nbCellPerRow</code> de la fonction <code>drawSquareGrid</code>
-                            <br/>&rightarrow; pas de style <code>height</code> et <code>width</code> en dur dans le css (ou alors valeur calculée en fonction du nombre de cases par côté)
-                            <br/>&rightarrow; découpler au maximum le modèle (js) de la vue (html et css)
-                        </p>
+                        <header>
+                            <h4>Grille <em>paramétrable</em>, sans grid, éléments générés par js</h4>
+                            <p>
+                                L&apos;idée est de reprendre <a href="#art-0">l&apos;implémentation précédente</a>, pour que le nombre de cases soit facilement paramétrable, avec uniquement l&apos;argument <code>nbCellPerRow</code> de la fonction <code>drawSquareGrid</code>
+                                <br/>&rightarrow; pas de style <code>height</code> et <code>width</code> en dur dans le css (ou alors valeur calculée en fonction du nombre de cases par côté)
+                                <br/>&rightarrow; découpler au maximum le modèle (js) de la vue (html et css)
+                            </p>
+                        </header>
                         <div id="board63"></div>
                         <link href="styles/custom63.css" rel="stylesheet" type="text/css">
                         <script src="scripts/custom63.js"></script>
@@ -171,13 +172,15 @@
                         </div>
                     </article>
                     <article id="art-3" class="topic-main-css">
-                        <h4>Grille paramétrable, <em>avec grid</em>, éléments générés par js</h4>
-                        <p>
-                            Jusqu&apos;à présent j&apos;ai voulu dessiner une grille sans le layout css grid (<a href="#art-0">ici</a> et <a href="#art-3">ici</a>), afin de travailler des fondamentaux css.
-                        </p>
-                        <p>
-                            Outre la documentation, j&apos;ai découvert ce petit tutoriel <a href="https://cssgridgarden.com/#fr" class="external">Grid Garden</a> qui permet de pratiquer ce layout de manière ludique (dans une certaine mesure, ça ne remplace pas un bon Fortnite !)
-                        </p>
+                        <header>
+                            <h4>Grille paramétrable, <em>avec grid</em>, éléments générés par js</h4>
+                            <p>
+                                Jusqu&apos;à présent j&apos;ai voulu dessiner une grille sans le layout css grid (<a href="#art-0">ici</a> et <a href="#art-3">ici</a>), afin de travailler des fondamentaux css.
+                            </p>
+                            <p>
+                                Outre la documentation, j&apos;ai découvert ce petit tutoriel <a href="https://cssgridgarden.com/#fr" class="external">Grid Garden</a> qui permet de pratiquer ce layout de manière ludique (dans une certaine mesure, tout est relatif !)
+                            </p>
+                        </header>
                         <div id="board103"></div>
                         <link href="styles/custom103.css" rel="stylesheet" type="text/css">
                         <script src="scripts/custom103.js"></script>
@@ -203,11 +206,13 @@
                     Cette page présente une mise en pratique de mes connaissances. Toutes sont perfectibles et critiquables. Dans cette section je vais détailler certains points qui me paraissent intéressants pour le partage, et pour mieux rendre compte de mes approches et façons de faire.
                 </p>
                 <article id="art-2" class="topic-main-html topic-aside-charset">
-                    <h3>&Eacute;chapper les caractères HTML : oui mes lesquels ?</h3>
-                    <p>
-                        Très peu de caractères sont échappés dans le code html de cette page (par exemple é que je tape en clair pourrait être échappé <code>&amp;eacute;</code>), parce qu'elle déclare utiliser le jeu de caractères utf-8 grâce à la balise <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> dans le <code>header</code>.
-                        <br/>Ainsi, pour peu que le code html soit encodé en utf-8 (mon IDE est configuré pour cela), et que le navigateur qui lit cette page connaît utf-8, les caractères seront rendus tels que je les ai écrits (je considère que c&apos;est maintenant toujours le cas; la question de la compatibilité des navigateurs est un énorme sujet, je ne vise pas ici une couverture maximale)
-                    </p>
+                    <header>
+                        <h3>&Eacute;chapper les caractères HTML : oui mes lesquels ?</h3>
+                        <p>
+                            Très peu de caractères sont échappés dans le code html de cette page (par exemple é que je tape en clair pourrait être échappé <code>&amp;eacute;</code>), parce qu'elle déclare utiliser le jeu de caractères utf-8 grâce à la balise <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> dans le <code>header</code>.
+                            <br/>Ainsi, pour peu que le code html soit encodé en utf-8 (mon IDE est configuré pour cela), et que le navigateur qui lit cette page connaît utf-8, les caractères seront rendus tels que je les ai écrits (je considère que c&apos;est maintenant toujours le cas; la question de la compatibilité des navigateurs est un énorme sujet, je ne vise pas ici une couverture maximale)
+                        </p>
+                    </header>
                     <p>
                         Pour être exhaustif, il faut s'assurer aussi que le serveur http ne surcharge pas la déclaration de la balise meta. Il peut le faire, en précisant le jeu de caractères dans une en-tête de réponse <code>Content-Type: text/html; charset=XXX</code> (<code>XXX</code> étant un code de jeu de caractères autre que utf-8, par ex. iso-8859-1)
                         Ce serait fâcheux et... surprenant !
@@ -228,7 +233,7 @@
             <section>
                 <h2>Boîte à liens</h2>
                 <p>
-                    TODO blabla
+                    Draft
                 </p>
                 <div class="info">
                     <ul>
@@ -242,7 +247,7 @@
             <section>
                 <h2>Mes outils, mon environnement</h2>
                 <p>
-                    TODO blabla
+                    Draft
                 </p>
                 <article id="art-6">
                     TODO VSCode, Live Server, Github pages

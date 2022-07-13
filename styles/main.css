@@ -6,15 +6,6 @@ body {
   margin: 8px;
 }
 
-header {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-}
-
-header .hook {
-  margin-left: 8px;
-}
-
 /*
  Display an arrow U+0279A after anchor's link to be opened in a new tab
 */
