@@ -106,7 +106,7 @@
                 <section>
                     <h3>Dessine moi une grille</h3>
                     <p>
-                        Mes premiers travaux pratiques : après avoir longuement réfléchi à imaginer un jeu de plateau, j&apos;ai revu mes objectifs drastiquement à la baisse : déjà, il faut que je puisse <em>dessiner</em> un plateau... une grille en fait ! J&apos;inventerai le <a href="https://www.tetrisgratuit.fr/" class="external">Tetris</a> du futur plus tard !
+                        Mes premiers travaux pratiques : après avoir longuement réfléchi à imaginer un jeu de plateau, j&apos;ai revu mes objectifs drastiquement à la baisse : déjà, il faut que je puisse <em>dessiner</em> un plateau... une grille en fait ! J&apos;inventerai le <a href="https://www.tetrisgratuit.fr/" class="external">Tetris</a> du futur plus tard ! (qui n'est pas un jeu de plateau, certes, mais j'avais envie de caser ce lien quelque part !)
                     </p>
                     <article id="art-0" class="topic-main-css">
                         <header>
@@ -123,7 +123,7 @@
                             Je voulais avoir une maîtrise exacte de la taille du plateau, et que le calcul de la taille des cases ne soit pas affecté par les marges et les bordures.
                         </p>
                         <p>
-                            Pour ce dernier point, les éléments déterminants ont été l'utilisation de la directive css <code>box-sizing: border-box</code>,
+                            Pour ce dernier point, les éléments déterminants ont été l'utilisation de la directive css <code><strong>box-sizing: border-box</strong></code>,
                             ainsi que l'encapsulation de chaque ligne de la grille dans un <code>div</code> dédié.
                             En effet sans cette encapsulation, les cases, chacune rendue par un <code>div</code> et par une directive css <code>display: inline-block</code>,
                             s'alignaient correctement par lignes, mais il restait des marges verticales entre celles-ci. Je pense que ces marges étaient induites par le <em>inline</em> du <code>inline-block</code>.
