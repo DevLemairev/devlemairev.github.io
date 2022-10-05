@@ -79,31 +79,27 @@
                     </p>
                     <ul>
                         <li>
-                            <p>
-                                Côté présentation (html / css)
-                                <ul>
-                                    <li>le widget est composé de : un <code>button</code> &quot;&lt;&quot; pour décaler les slides vers la gauche, un <code>div</code> contenant les slides, un <code>button</code> &quot;&gt;&quot; pour décaler les slides vers la droite</li>
-                                    <li>règle css <code><strong>display: inline-block</strong></code> sur <code><strong>.slider &gt; *</strong></code> pour aligner les éléments du widget (évite les ruptures de ligne avant et après un élément nativement <em>block</em>, tout en permettant de le dimensionner)</li>
-                                    <li>
-                                        règles css <code><strong>overflow: hidden</strong></code> et <code><strong>width: calc(100% - 3em)</strong></code><sup>1</sup> sur le <code>div</code> contenant les slides (limite l&apos;affichage du contenu de l&apos;élément à sa largeur déclarée, le contenu débordant étant caché)
-                                        <br/><sup>1</sup> : <em>3em</em> est la largeur additionnée des boutons &quot;&lt;&quot; et &quot;&gt;&quot;, que l'on retire donc des 100% (largeur totale disponible dans l'élément parent)
-                                    </li>
-                                    <li>règle css <code><strong>position: relative</strong></code> sur chaque slide, pour pouvoir les décaler par rapport à leur emplacement naturel (décalage horizontal avec la propriété css <code><strong>left</strong></code> des slides, positionnée par code quand on clique sur les boutons &quot;&lt;&quot; et &quot;&gt;&quot;)</li>
-                                </ul>
-                            </p>
+                            Côté présentation (html / css)
+                            <ul>
+                                <li>le widget est composé de : un <code>button</code> &quot;&lt;&quot; pour décaler les slides vers la gauche, un <code>div</code> contenant les slides, un <code>button</code> &quot;&gt;&quot; pour décaler les slides vers la droite</li>
+                                <li>règle css <code><strong>display: inline-block</strong></code> sur <code><strong>.slider &gt; *</strong></code> pour aligner les éléments du widget (évite les ruptures de ligne avant et après un élément nativement <em>block</em>, tout en permettant de le dimensionner)</li>
+                                <li>
+                                    règles css <code><strong>overflow: hidden</strong></code> et <code><strong>width: calc(100% - 3em)</strong></code><sup>1</sup> sur le <code>div</code> contenant les slides (limite l&apos;affichage du contenu de l&apos;élément à sa largeur déclarée, le contenu débordant étant caché)
+                                    <br/><sup>1</sup> : <em>3em</em> est la largeur additionnée des boutons &quot;&lt;&quot; et &quot;&gt;&quot;, que l'on retire donc des 100% (largeur totale disponible dans l'élément parent)
+                                </li>
+                                <li>règle css <code><strong>position: relative</strong></code> sur chaque slide, pour pouvoir les décaler par rapport à leur emplacement naturel (décalage horizontal avec la propriété css <code><strong>left</strong></code> des slides, positionnée par code quand on clique sur les boutons &quot;&lt;&quot; et &quot;&gt;&quot;)</li>
+                            </ul>
                         </li>
                         <li>
-                            <p>
-                                Côté code
-                                <ul>
-                                    <li>j&apos;ai rapidement décidé d&apos;écrire en TypeScript plutôt que JavaScript :
-                                    c&apos;était l&apos;occasion de s&apos;y mettre car une fois l&apos;IDE correctement configuré c&apos;est un gain conséquent (ayant pratiqué pendant longtemps des langages typés tels que C++ ou Java je savais tout l&apos;intérêt de passer à TypeScript rapidement)
-                                    <br/>Voir <a href="https://docs.microsoft.com/en-us/learn/modules/typescript-get-started/2-TypeScript-overview" class="external">cet article</a> dans lequel Microsoft (l&apos;inventeur de TypeScript) décrit l&apos;intérêt du langage.
-                                    </li>
-                                    <li>utilisation du <em>pattern</em> <code><strong>ResizeObserver</strong></code> pour mettre à jour la disponibilité des boutons &quot;&lt;&quot; et &quot;&gt;&quot; (suivant la taille du <code>div</code> conteneur tous les slides ne sont pas visibles à un instant; on peut en découvrir d&apos;autres qui sont dans le contenu caché de ce conteneur)</li>
-                                    <li>ce widget carousel est un candidat idéal pour s&apos;exercer à faire un élément html <em>custom</em>, et certainement pour un 1er pas vers un framework comme React : à suivre...</li>
-                                </ul>
-                            </p>
+                            Côté code
+                            <ul>
+                                <li>j&apos;ai rapidement décidé d&apos;écrire en TypeScript plutôt que JavaScript :
+                                c&apos;était l&apos;occasion de s&apos;y mettre car une fois l&apos;IDE correctement configuré c&apos;est un gain conséquent (ayant pratiqué pendant longtemps des langages typés tels que C++ ou Java je savais tout l&apos;intérêt de passer à TypeScript rapidement)
+                                <br/>Voir <a href="https://docs.microsoft.com/en-us/learn/modules/typescript-get-started/2-TypeScript-overview" class="external">cet article</a> dans lequel Microsoft (l&apos;inventeur de TypeScript) décrit l&apos;intérêt du langage.
+                                </li>
+                                <li>utilisation du <em>pattern</em> <code><strong>ResizeObserver</strong></code> pour mettre à jour la disponibilité des boutons &quot;&lt;&quot; et &quot;&gt;&quot; (suivant la taille du <code>div</code> conteneur tous les slides ne sont pas visibles à un instant; on peut en découvrir d&apos;autres qui sont dans le contenu caché de ce conteneur)</li>
+                                <li>ce widget carousel est un candidat idéal pour s&apos;exercer à faire un élément html <em>custom</em>, et certainement pour un 1er pas vers un framework comme React : à suivre...</li>
+                            </ul>
                         </li>
                     </ul>
                     <div class="resource">
